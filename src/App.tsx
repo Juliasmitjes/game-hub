@@ -5,11 +5,13 @@ import RockPaperScissors from "./pages/RockPaperScissors";
 import Memory from "./pages/Memory";
 import TicTacToe from "./pages/TicTacToe";
 import NotFound from "./pages/NotFound";
+import { BrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/rock-paper-scissors" element={<RockPaperScissors />} />
@@ -17,6 +19,7 @@ const App = () => (
           <Route path="/tic-tac-toe" element={<TicTacToe />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+      </BrowserRouter>
   </QueryClientProvider>
 );
 

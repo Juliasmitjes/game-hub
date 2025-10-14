@@ -1,6 +1,6 @@
 import GameCard from "../components/GameCard";
 import { Hand, Brain, Grid3x3 } from "lucide-react";
-import heroImage from "@/assets/hero-gaming.jpg";
+import heroImage from "../assets/background.jpg";
 
 const Index = () => {
   const games = [
