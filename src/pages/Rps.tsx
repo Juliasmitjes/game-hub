@@ -58,12 +58,10 @@ type PlayerProps = {
   action?: Action;
 };
 
-function Player({action = "rock" }: PlayerProps) {
+function Player({ action = "rock" }: PlayerProps) {
   return (
-    <div className="flex flex-col font-myText w-30 h-30">
-      <div className="flex flex-row justify-center items-center">
-        {action && <ActionIcon action={action} size={60} className="text-primary"/>}
-      </div>
+    <div className="flex flex-col items-center justify-items-center font-myText w-32 h-32">
+      {action && <ActionIcon action={action} size={60} className="text-primary" />}
     </div>
   );
 }
@@ -134,32 +132,27 @@ function Rps() {
           </CardHeader>
         <CardContent>
 
-          <div className="flex justify-center gap-8 mb-8">
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground mb-2">You</p>
-                <p className="text-3xl font-bold text-primary">{playerScore}</p>
-              </div>
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground mb-2">Computer</p>
-                <p className="text-3xl font-bold text-secondary">{computerScore}</p>
-              </div>
+          <div className="flex justify-center gap-12 mb-8">
+            {/* Player column */}
+            <div className="flex flex-col items-center text-center w-40">
+              <p className="text-md font-bold text-muted-foreground mb-1">You</p>
+              <p className="text-3xl font-bold text-primary mb-3">{playerScore}</p>
+              <Player name="Player" action={playerAction} />
             </div>
 
-
-        <div>
-          <div className="flex items-center justify-center pb-4">
-            <Player name="Player" action={playerAction} />
-            <Player name="Computer" action={computerAction} />
+            {/* Computer column */}
+            <div className="flex flex-col items-center text-center w-40">
+              <p className="text-md font-bold text-muted-foreground mb-1">Computer</p>
+              <p className="text-3xl font-bold text-secondary mb-3">{computerScore}</p>
+              <Player name="Computer" action={computerAction} />
+            </div>
           </div>
-
-        
 
           <div className="grid grid-cols-3 gap-4 mb-8">
             <ActionButton action="rock" onActionSelected={onActionSelected} />
             <ActionButton action="paper" onActionSelected={onActionSelected} />
             <ActionButton action="scissors" onActionSelected={onActionSelected} />
           </div>
-        </div>
         
         <ShowWinner winner={winner} />         
         </CardContent>
