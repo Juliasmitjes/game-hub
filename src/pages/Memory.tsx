@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { GiPodiumWinner } from "react-icons/gi";
 import { FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -43,6 +43,7 @@ function Memory(){
   const [disabled, setDisabled] = useState(false);
   const [endMessage, setEndMessage] = useState("");
   const [moves, setMoves] = useState(0);
+  const timeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
   const revealedItems = items.map(item => ({ ...item, stat: "active" }));
@@ -108,12 +109,23 @@ function handleClick(id: number) {
 
 }
 
-function newGame(){
+function newGame() {
   setEndMessage("");
   setMoves(0);
-  setItems(prev =>
-    [...prev.map(item => ({ ...item, stat: "" }))].sort(() => Math.random() - 0.5)
+
+  if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+  const shuffledItems = [...items.map(item => ({ ...item, stat: "" }))].sort(
+    () => Math.random() - 0.5
   );
+
+  const revealedItems = shuffledItems.map(item => ({ ...item, stat: "active" }));
+  setItems(revealedItems);
+
+  timeoutRef.current = window.setTimeout(() => {
+    setItems(revealedItems.map(item => ({ ...item, stat: "" })));
+  }, 2000);
+  setDisabled(false);
 }
 
 return ( 
