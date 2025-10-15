@@ -60,9 +60,9 @@ type PlayerProps = {
 
 function Player({action = "rock" }: PlayerProps) {
   return (
-    <div className="flex flex-col font-myText text-myOcean w-30 h-30">
+    <div className="flex flex-col font-myText w-30 h-30">
       <div className="flex flex-row justify-center items-center">
-        {action && <ActionIcon action={action} size={60} />}
+        {action && <ActionIcon action={action} size={60} className="text-primary"/>}
       </div>
     </div>
   );
@@ -87,7 +87,7 @@ function ActionButton({ action, onActionSelected }: ActionButtonProps) {
 
 function ShowWinner({ winner = 0 }: { winner?: Winner }) {
   return (
-    <h2 className="text-xl sm:text-2xl font-myText text-center">
+    <h2 className="text-xl sm:text-2xl font-bold text-background text-center">
       {text[winner]}
     </h2>
   );
