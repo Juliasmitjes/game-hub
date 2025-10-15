@@ -76,7 +76,7 @@ type ActionButtonProps = {
 function ActionButton({ action, onActionSelected }: ActionButtonProps) {
   return (
     <Button
-      className="h-32 flex flex-col gap-3 hover:scale-105 transition-all duration-300 hover:bg-primary hover:text-primary-foreground border-2  cursor-pointer"
+      className="h-32 flex flex-col gap-3 hover:scale-105 transition-all duration-300 hover:bg-primary/20 text-primary-foreground border-2 cursor-pointer"
       variant="outline"
       onClick={() => onActionSelected(action)}
     >
@@ -116,7 +116,7 @@ function Rps() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-secondary via-accent to-primary p-4 md:p-8">
        <div className="max-w-4xl mx-auto">
         <Link to="/">
           <Button variant="outline" className="mb-6 cursor-pointer">
@@ -126,7 +126,7 @@ function Rps() {
         </Link>
     
 
-        <Card className="mb-8 border-2 shadow-[var(--shadow-game)]">
+        <Card className="mb-8 border-2 shadow-[var(--shadow-game)] bg-background/30">
           <CardHeader>
             <CardTitle className="text-4xl font-bold text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               Rock Paper Scissors
