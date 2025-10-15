@@ -82,7 +82,7 @@ const endGame = (winner: "player" | "computer" | "draw") => {
   const getCellColor = (cell: Player) => {
     if (cell === "X") return "bg-gradient-to-br from-primary to-primary/80 text-primary-foreground";
     if (cell === "O") return "bg-gradient-to-br from-secondary to-secondary/80 text-secondary-foreground";
-    return "bg-muted hover:bg-muted/80";
+    return "bg-accent border-2  shadow-lg border-2 transition-all duration-300 hover:bg-primary/20  hover:scale-105";
   };
 
   return (
