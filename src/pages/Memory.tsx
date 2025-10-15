@@ -129,7 +129,7 @@ return (
 
      <Card className="mb-8 border-2 shadow-[var(--shadow-game)] bg-background/30">
       <CardHeader>
-        <CardTitle className="text-4xl font-bold text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+        <CardTitle className="text-4xl font-bold text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-tight pb-1">
           Memory
         </CardTitle>
         <div className="flex justify-center gap-8 mt-8">
@@ -140,7 +140,7 @@ return (
         </div>
       </CardHeader>
 
-    <CardContent className="mt-8 justify-items-center">
+    <CardContent className="justify-items-center">
 
     {endMessage && (
       <div

@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import RPS from './pages/Rps';
 import Memory from "./pages/Memory";
-import MemoryOude from "./pages/MemoryOude"
 import TicTacToe from "./pages/TicTacToe";
 import NotFound from "./pages/NotFound";
 import { BrowserRouter } from "react-router-dom";
@@ -18,7 +17,6 @@ const App = () => (
           <Route path="/rock-paper-scissors" element={<RPS />} />
           <Route path="/memory" element={<Memory />} />
           <Route path="/tic-tac-toe" element={<TicTacToe />} />
-          <Route path="/meoud" element={<MemoryOude />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
