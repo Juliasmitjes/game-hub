@@ -146,7 +146,7 @@ return (
         </CardTitle>
         <div className="flex justify-center gap-8 mt-8">
           <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-2">Moves</p>
+            <p className="text-md font-bold text-muted-foreground mb-2">Moves</p>
             <p className="text-3xl font-bold text-primary">{moves}</p>
           </div>
         </div>
