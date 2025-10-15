@@ -12,8 +12,9 @@ import kareoke from '../assets/kareoke.png';
 import pizza from '../assets/pizza.png';
 import present from '../assets/present.png';
 import {Button} from '../components/ui/button';
-import { ArrowLeft } from "lucide-react";
-
+import { ArrowLeft, Sparkles } from "lucide-react";
+import '../memory.css';
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 
 
 
@@ -41,6 +42,7 @@ function Memory(){
   const [prev, setPrev] = useState(-1);
   const [disabled, setDisabled] = useState(false);
   const [endMessage, setEndMessage] = useState("");
+  const [moves, setMoves] = useState(0);
 
   useEffect(() => {
   const revealedItems = items.map(item => ({ ...item, stat: "active" }));
@@ -56,6 +58,7 @@ function Memory(){
 
 
 function check(current: number) {
+  setMoves(prev => prev + 1);
   const newItems = [...items];
 
   if (newItems[current].id === newItems[prev].id) {
@@ -105,10 +108,39 @@ function handleClick(id: number) {
 
 }
 
+function newGame(){
+  setEndMessage("");
+  setMoves(0);
+  setItems(prev =>
+    [...prev.map(item => ({ ...item, stat: "" }))].sort(() => Math.random() - 0.5)
+  );
+}
+
 return ( 
-<div className="relative bg-myOcean">  
-  <div className="h-screen bg-myWarm content-center sm:mx-6 pb-10 flex flex-col justify-center items-center">
-     <p className="text-2xl sm:text-4xl font-myHeader text-myBlue pb-8">Memory</p>
+<div className="min-h-screen bg-gradient-to-br from-secondary via-accent to-primary p-4 md:p-8">  
+  <div className="max-w-4xl mx-auto">
+    <Link to="/">
+      <Button variant="outline" className="mb-6">
+        <ArrowLeft className="mr-2 h-4 w-4" />
+        Back to Games
+      </Button>
+    </Link>
+
+
+     <Card className="mb-8 border-2 shadow-[var(--shadow-game)] bg-background/30">
+      <CardHeader>
+        <CardTitle className="text-4xl font-bold text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          Memory
+        </CardTitle>
+        <div className="flex justify-center gap-8 mt-8">
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground mb-2">Moves</p>
+            <p className="text-3xl font-bold text-primary">{moves}</p>
+          </div>
+        </div>
+      </CardHeader>
+
+    <CardContent className="mt-8 justify-items-center">
 
     {endMessage && (
       <div
@@ -152,12 +184,18 @@ return (
         />
       ))}
       </div>
-      <Link to="/">
-          <Button variant="outline" className="mb-6">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Games
-          </Button>
-        </Link>
+      <div className="flex justify-center">
+        <Button
+          onClick={newGame}
+          className="mt-8 bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+          size="lg"
+        >
+          <Sparkles className="mr-2 h-5 w-5" />
+          New Game
+        </Button>
+      </div>
+     </CardContent>
+    </Card> 
   </div>  
 </div>
 )}
