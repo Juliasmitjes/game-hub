@@ -1,154 +1,165 @@
 import { useState, useEffect } from "react";
-import { Button } from "../components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { GiPodiumWinner } from "react-icons/gi";
+import { FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import MemoryCard from '../components/MemoryCard';
+import avocado from '../assets/avocado.png';
+import bee from '../assets/bee.png';
+import coffee from '../assets/coffee.png';
+import game from '../assets/game.png';
+import guitar from '../assets/guitar.png';
+import kareoke from '../assets/kareoke.png';
+import pizza from '../assets/pizza.png';
+import present from '../assets/present.png';
+import {Button} from '../components/ui/button';
+import { ArrowLeft } from "lucide-react";
 
-interface CardType {
-  id: number;
-  emoji: string;
-  isFlipped: boolean;
-  isMatched: boolean;
+
+
+
+function Memory(){
+
+  const [items, setItems] = useState([
+    {id: 1, img: avocado, stat: ""},
+    {id: 1, img: avocado, stat: ""},
+    {id: 2, img: bee, stat: ""},
+    {id: 2, img: bee, stat: ""},
+    {id: 3, img: coffee, stat: ""},
+    {id: 3, img: coffee, stat: ""},
+    {id: 4, img: game, stat: ""},
+    {id: 4, img: game, stat: ""},
+    {id: 5, img: guitar, stat: ""},
+    {id: 5, img: guitar, stat: ""},
+    {id: 6, img: kareoke, stat: ""},
+    {id: 6, img: kareoke, stat: ""},
+    {id: 7, img: pizza, stat: ""},
+    {id: 7, img: pizza, stat: ""},
+    {id: 8, img: present, stat: ""},
+    {id: 8, img: present, stat: ""},
+  ].sort(() => Math.random() - 0.5));
+
+  const [prev, setPrev] = useState(-1);
+  const [disabled, setDisabled] = useState(false);
+  const [endMessage, setEndMessage] = useState("");
+
+  useEffect(() => {
+  const revealedItems = items.map(item => ({ ...item, stat: "active" }));
+  setItems(revealedItems);
+
+  const timeout = setTimeout(() => {
+    const hiddenItems = revealedItems.map(item => ({ ...item, stat: "" }));
+    setItems(hiddenItems);
+      }, 2000);
+
+      return () => clearTimeout(timeout);
+    }, []);
+
+
+function check(current: number) {
+  const newItems = [...items];
+
+  if (newItems[current].id === newItems[prev].id) {
+    newItems[current] = { ...newItems[current], stat: "correct" };
+    newItems[prev] = { ...newItems[prev], stat: "correct" };
+    setItems(newItems);
+    setPrev(-1);
+    setDisabled(false);
+
+     if (newItems.every(card => card.stat === "correct")) {
+      setEndMessage("Well done! Let’s see if you can do it again. Up for another?");
+    }
+  } else {
+    newItems[current] = { ...newItems[current], stat: "wrong" };
+    newItems[prev] = { ...newItems[prev], stat: "wrong" };
+    setItems(newItems);
+
+    setTimeout(() => {
+      setItems(prevItems => {
+        const updatedItems = [...prevItems];
+        updatedItems[current] = { ...updatedItems[current], stat: "" };
+        updatedItems[prev] = { ...updatedItems[prev], stat: "" };
+        return updatedItems;
+      });
+      setPrev(-1);
+      setDisabled(false);
+    }, 1000); // 
+  }
 }
 
-const emojis = ["🎮", "🎯", "🎲", "🎪", "🎨", "🎭", "🎸", "🎺"];
+function handleClick(id: number) {
+  if (disabled) return;
+  if (items[id].stat === "correct" || items[id].stat === "wrong") return; 
 
-const Memory = () => {
-  const [cards, setCards] = useState<CardType[]>([]);
-  const [flippedCards, setFlippedCards] = useState<number[]>([]);
-  const [moves, setMoves] = useState(0);
-  const [matches, setMatches] = useState(0);
+  const newItems = [...items];
+  newItems[id] = { ...newItems[id], stat: "active" };
+  setItems(newItems);
 
-  useEffect(() => {
-    initializeGame();
-  }, []);
+  if (prev === -1) {
+    setPrev(id);
+  } else {
+    setDisabled(true); 
+    setTimeout(() => {
+      check(id);
+    }, 500); 
+  } 
 
-  useEffect(() => {
-    if (flippedCards.length === 2) {
-      checkMatch();
-    }
-  }, [flippedCards]);
+}
 
-  const initializeGame = () => {
-    const shuffledEmojis = [...emojis, ...emojis]
-      .sort(() => Math.random() - 0.5)
-      .map((emoji, index) => ({
-        id: index,
-        emoji,
-        isFlipped: false,
-        isMatched: false,
-      }));
-    setCards(shuffledEmojis);
-    setFlippedCards([]);
-    setMoves(0);
-    setMatches(0);
-  };
+return ( 
+<div className="relative bg-myOcean">  
+  <div className="h-screen bg-myWarm content-center sm:mx-6 pb-10 flex flex-col justify-center items-center">
+     <p className="text-2xl sm:text-4xl font-myHeader text-myBlue pb-8">Memory</p>
 
-  const handleCardClick = (id: number) => {
-    if (flippedCards.length === 2 || flippedCards.includes(id)) return;
-    
-    const card = cards.find(c => c.id === id);
-    if (card?.isMatched) return;
+    {endMessage && (
+      <div
+        className="absolute inset-0 flex items-center justify-center z-20"
+        role="dialog"
+        aria-modal="true"
+      >
+        <div className="relative h-screen bg-white w-lg p-6 rounded-lg text-center shadow-lg">
+          <button
+          type="button"
+          aria-label="Close"
+          className="absolute top-2 right-2 text-myBlue cursor-pointer hover:text-myDark text-3xl active:scale-110 sm:active:scale-100"
+          onClick={() => setEndMessage("")}
+            >
+          <span className="sr-only">Close</span>
+          <FaTimes size={20} />
+          </button>
 
-    setCards(cards.map(c => 
-      c.id === id ? { ...c, isFlipped: true } : c
-    ));
-    setFlippedCards([...flippedCards, id]);
-  };
-
-  const checkMatch = () => {
-    const [first, second] = flippedCards;
-    const firstCard = cards.find(c => c.id === first);
-    const secondCard = cards.find(c => c.id === second);
-
-    setMoves(moves + 1);
-
-    if (firstCard?.emoji === secondCard?.emoji) {
-      setCards(cards.map(c => 
-        c.id === first || c.id === second 
-          ? { ...c, isMatched: true } 
-          : c
-      ));
-      setMatches(matches + 1);
-      // toast.success("Match found! 🎉");
-      setFlippedCards([]);
-      
-      if (matches + 1 === emojis.length) {
-        setTimeout(() => {
-          // toast.success(`You won in ${moves + 1} moves! 🏆`);
-        }, 500);
-      }
-    } else {
-      // toast.error("No match!");
-      setTimeout(() => {
-        setCards(cards.map(c => 
-          c.id === first || c.id === second 
-            ? { ...c, isFlipped: false } 
-            : c
-        ));
-        setFlippedCards([]);
-      }, 1000);
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background p-4 md:p-8">
-      <div className="max-w-4xl mx-auto">
-        <Link to="/">
+          <GiPodiumWinner className="mx-auto mb-2 text-5xl font-myText text-myBlue" />
+          <p className="mb-6 text-lg font-myText text-myOcean">{endMessage}</p>
+          <button
+            className="px-4 py-2 bg-myBlue font-myText font-bold text-white rounded hover:bg-myDark cursor-pointer active:scale-110 sm:active:scale-100"
+            onClick={() => {
+              setEndMessage("");         
+              window.location.reload();   
+            }}
+          >
+            Play again
+          </button>
+            
+        </div>
+      </div>
+    )}
+      <div className="grid grid-cols-4 grid-rows-4 h-80 sm:h-100 w-80 sm:w-100 gap-2">   
+        {items.map((item, index) => (
+        <MemoryCard 
+        key={index} 
+        item={item} 
+        id={index} 
+        handleClick={handleClick}
+        />
+      ))}
+      </div>
+      <Link to="/">
           <Button variant="outline" className="mb-6">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Games
           </Button>
         </Link>
-
-        <Card className="mb-8 border-2 shadow-[var(--shadow-game)]">
-          <CardHeader>
-            <CardTitle className="text-4xl font-bold text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Memory Game
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex justify-center gap-8 mb-8">
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground mb-2">Moves</p>
-                <p className="text-3xl font-bold text-primary">{moves}</p>
-              </div>
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground mb-2">Matches</p>
-                <p className="text-3xl font-bold text-secondary">{matches}/{emojis.length}</p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-4 gap-4 mb-6">
-              {cards.map((card) => (
-                <button
-                  key={card.id}
-                  onClick={() => handleCardClick(card.id)}
-                  className={`aspect-square rounded-2xl text-4xl font-bold transition-all duration-300 ${
-                    card.isFlipped || card.isMatched
-                      ? "bg-gradient-to-br from-primary to-secondary text-primary-foreground scale-95"
-                      : "bg-muted hover:scale-105 hover:bg-muted/80"
-                  } ${card.isMatched ? "opacity-60" : ""}`}
-                  disabled={card.isMatched}
-                >
-                  {card.isFlipped || card.isMatched ? card.emoji : "?"}
-                </button>
-              ))}
-            </div>
-
-            <Button
-              onClick={initializeGame}
-              className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90"
-              size="lg"
-            >
-              <Sparkles className="mr-2 h-5 w-5" />
-              New Game
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  );
-};
+  </div>  
+</div>
+)}
 
 export default Memory;
