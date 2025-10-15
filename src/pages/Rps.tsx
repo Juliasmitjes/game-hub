@@ -80,14 +80,14 @@ function ActionButton({ action, onActionSelected }: ActionButtonProps) {
       variant="outline"
       onClick={() => onActionSelected(action)}
     >
-      <ActionIcon action={action}/>
+      <ActionIcon action={action} className="!w-10 !h-10" />
     </Button>
   );
 }
 
 function ShowWinner({ winner = 0 }: { winner?: Winner }) {
   return (
-    <h2 className="text-xl sm:text-2xl font-myText text-myOcean">
+    <h2 className="text-xl sm:text-2xl font-myText text-center">
       {text[winner]}
     </h2>
   );
@@ -117,14 +117,14 @@ function Rps() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background p-4 md:p-8">
-      <div className="max-w-4xl mx-auto">
+       <div className="max-w-4xl mx-auto">
         <Link to="/">
           <Button variant="outline" className="mb-6 cursor-pointer">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Games
           </Button>
         </Link>
-      </div>
+    
 
         <Card className="mb-8 border-2 shadow-[var(--shadow-game)]">
           <CardHeader>
@@ -160,11 +160,11 @@ function Rps() {
             <ActionButton action="scissors" onActionSelected={onActionSelected} />
           </div>
         </div>
-
+        
         <ShowWinner winner={winner} />         
         </CardContent>
       </Card>
-       
+      </div> 
     </div>
   );
 }
