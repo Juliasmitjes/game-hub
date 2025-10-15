@@ -135,15 +135,15 @@ function Rps() {
           <div className="flex justify-center gap-12 mb-8">
             {/* Player column */}
             <div className="flex flex-col items-center text-center w-40">
-              <p className="text-md font-bold text-muted-foreground mb-1">You</p>
-              <p className="text-3xl font-bold text-primary mb-3">{playerScore}</p>
+              <p className="text-md font-bold text-muted-foreground mb-1 mt-5">You</p>
+              <p className="text-3xl font-bold text-primary mb-10">{playerScore}</p>
               <Player name="Player" action={playerAction} />
             </div>
 
             {/* Computer column */}
             <div className="flex flex-col items-center text-center w-40">
-              <p className="text-md font-bold text-muted-foreground mb-1">Computer</p>
-              <p className="text-3xl font-bold text-secondary mb-3">{computerScore}</p>
+              <p className="text-md font-bold text-muted-foreground mb-1 mt-5">Computer</p>
+              <p className="text-3xl font-bold text-secondary mb-10">{computerScore}</p>
               <Player name="Computer" action={computerAction} />
             </div>
           </div>

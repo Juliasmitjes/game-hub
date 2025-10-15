@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
-import { ArrowLeft, RotateCcw } from "lucide-react";
+import { ArrowLeft, Sparkles } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 
 
@@ -105,15 +105,15 @@ const endGame = (winner: "player" | "computer" | "draw") => {
         <CardContent>
       <div className="flex justify-center gap-8 mb-8">
           <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-2">You (X)</p>
+            <p className="text-md font-bold text-muted-foreground mb-2">You (X)</p>
             <p className="text-3xl font-bold text-primary">{score.player}</p>
           </div>
           <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-2">Draws</p>
+            <p className="text-md font-bold text-muted-foreground mb-2">Draws</p>
             <p className="text-3xl font-bold text-muted-foreground">{score.draw}</p>
           </div>
           <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-2">Computer (O)</p>
+            <p className="text-md font-bold text-muted-foreground mb-2">Computer (O)</p>
             <p className="text-3xl font-bold text-secondary">{score.computer}</p>
           </div>
         </div>
@@ -133,14 +133,16 @@ const endGame = (winner: "player" | "computer" | "draw") => {
           ))}
         </div>
 
-         <Button
+       <div className="flex justify-center">
+        <Button
           onClick={resetGame}
-          className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+          className="mt-8 bg-gradient-to-r from-primary to-secondary hover:opacity-90"
           size="lg"
         >
-          <RotateCcw className="mr-2 h-5 w-5" />
+          <Sparkles className="mr-2 h-5 w-5" />
           New Game
-        </Button>    
+        </Button>
+      </div>  
     </CardContent>
     </Card>
   </div>
