@@ -1,6 +1,7 @@
 import GameCard from "../components/GameCard";
 import { Hand, Brain, Grid3x3 } from "lucide-react";
 import heroImage from "../assets/background.jpg";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const games = [
@@ -44,6 +45,8 @@ const Index = () => {
             <p className="text-xl md:text-2xl text-background max-w-2xl mx-auto animate-fade-in">
               Choose your game and have fun!
             </p>
+
+            <Link to="/rps">ANDERE VERSIE!</Link>
           </div>
         </div>
 

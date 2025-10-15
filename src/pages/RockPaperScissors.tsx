@@ -70,6 +70,7 @@ const RockPaperScissors = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
+            
             <div className="flex justify-center gap-8 mb-8">
               <div className="text-center">
                 <p className="text-sm text-muted-foreground mb-2">You</p>
