@@ -13,7 +13,7 @@ import pizza from '../assets/pizza.png';
 import present from '../assets/present.png';
 import {Button} from '../components/ui/button';
 import { ArrowLeft, Sparkles } from "lucide-react";
-import '../memory.css';
+import '../styles/memory.css';
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 
 

@@ -5,13 +5,13 @@ import RPS from './pages/Rps';
 import Memory from "./pages/Memory";
 import TicTacToe from "./pages/TicTacToe";
 import NotFound from "./pages/NotFound";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
+    <HashRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/rock-paper-scissors" element={<RPS />} />
@@ -19,7 +19,7 @@ const App = () => (
           <Route path="/tic-tac-toe" element={<TicTacToe />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
   </QueryClientProvider>
 );
 
