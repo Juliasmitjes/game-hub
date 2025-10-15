@@ -94,29 +94,29 @@ const endGame = (winner: "player" | "computer" | "draw") => {
             Back to Games
           </Button>
         </Link>
-
         
         <Card className="mb-8 border-2 shadow-[var(--shadow-game)] bg-background/30">
-          <CardHeader>
-            <CardTitle className="text-4xl font-bold text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Tic Tac Toe 
+          <CardHeader className="flex justify-center">
+            <CardTitle className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent text-center">
+              Tic Tac Toe
             </CardTitle>
           </CardHeader>
-        <CardContent>
-      <div className="flex justify-center gap-8 mb-8">
-          <div className="text-center">
-            <p className="text-md font-bold text-muted-foreground mb-2">You (X)</p>
-            <p className="text-3xl font-bold text-primary">{score.player}</p>
-          </div>
-          <div className="text-center">
-            <p className="text-md font-bold text-muted-foreground mb-2">Draws</p>
-            <p className="text-3xl font-bold text-muted-foreground">{score.draw}</p>
-          </div>
-          <div className="text-center">
-            <p className="text-md font-bold text-muted-foreground mb-2">Computer (O)</p>
-            <p className="text-3xl font-bold text-secondary">{score.computer}</p>
-          </div>
-        </div>
+
+          <CardContent>
+            <div className="flex justify-center gap-8 mb-8 w-full">
+              <div className="text-center w-32">
+                <p className="text-md font-bold text-muted-foreground mb-2">You (X)</p>
+                <p className="text-3xl font-bold text-primary">{score.player}</p>
+              </div>
+              <div className="text-center w-32">
+                <p className="text-md font-bold text-muted-foreground mb-2">Draws</p>
+                <p className="text-3xl font-bold text-muted-foreground">{score.draw}</p>
+              </div>
+              <div className="text-center w-32">
+                <p className="text-md font-bold text-muted-foreground mb-2">Computer (O)</p>
+                <p className="text-3xl font-bold text-secondary">{score.computer}</p>
+              </div>
+            </div>
 
          <div className="grid grid-cols-3 gap-4 mb-8 max-w-md mx-auto">
           {board.map((cell, index) => (
