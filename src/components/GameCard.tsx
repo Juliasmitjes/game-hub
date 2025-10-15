@@ -21,7 +21,7 @@ const GameCard = ({ title, description, icon: Icon, path, gradient }: GameCardPr
           >
             <Icon className="w-10 h-10 text-primary-foreground" />
           </div>
-          <h3 className="text-2xl font-bold mb-3 text-foreground">{title}</h3>
+          <h3 className="text-2xl font-bold mb-3 text-text-mainpage/80">{title}</h3>
           <p className="text-background">{description}</p>
         </CardContent>
       </Card>
