@@ -13,7 +13,7 @@ interface GameCardProps {
 const GameCard = ({ title, description, icon: Icon, path, gradient }: GameCardProps) => {
   return (
     <Link to={path} className="group">
-      <Card className="overflow-hidden border-2 transition-all duration-300 hover:scale-105 hover:shadow-[var(--shadow-game)] bg-card/80 backdrop-blur-sm">
+      <Card className="overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[var(--shadow-game)] bg-primary/20 backdrop-blur-sm">
         <CardContent className="p-8">
           <div 
             className="w-20 h-20 rounded-2xl mb-6 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
