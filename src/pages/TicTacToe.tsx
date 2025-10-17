@@ -188,6 +188,7 @@ const endGame = (winner: "player" | "computer" | "draw") => {
       draggable
       theme="dark"
       transition={Slide}
+      icon={false}
     />
 </div>
   );
