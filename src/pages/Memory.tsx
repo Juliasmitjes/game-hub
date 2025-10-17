@@ -154,37 +154,38 @@ return (
 
     <CardContent className="justify-items-center">
 
-    {endMessage && (
-      <div
-        className="absolute inset-0 flex items-center justify-center z-20"
+          {endMessage && (
+          <div
+        className="absolute inset-0 z-20 flex items-center justify-center bg-black/50 backdrop-blur-sm"
         role="dialog"
         aria-modal="true"
       >
-        <div className="relative h-screen bg-white w-lg p-6 rounded-lg text-center shadow-lg">
-          <button
-          type="button"
-          aria-label="Close"
-          className="absolute top-2 right-2 text-myBlue cursor-pointer hover:text-myDark text-3xl active:scale-110 sm:active:scale-100"
-          onClick={() => setEndMessage("")}
-            >
-          <span className="sr-only">Close</span>
-          <FaTimes size={20} />
-          </button>
+        <div className="relative flex flex-col items-center justify-center h-70 bg-accent w-80 sm:w-lg p-6 rounded-lg text-center shadow-lg">
+          <Button
+            type="button"
+            aria-label="Close"
+            className="absolute top-2 right-2"
+            variant="outline"
+            onClick={() => setEndMessage("")}
+          >
+            <span className="sr-only">Close</span>
+            <FaTimes size={20} />
+          </Button>
 
-          <GiPodiumWinner className="mx-auto mb-2 text-5xl font-myText text-myBlue" />
-          <p className="mb-6 text-lg font-myText text-myOcean">{endMessage}</p>
-          <button
-            className="px-4 py-2 bg-myBlue font-myText font-bold text-white rounded hover:bg-myDark cursor-pointer active:scale-110 sm:active:scale-100"
+          <GiPodiumWinner className="mx-auto mb-2 text-5xl text-white" />
+          <p className="mb-6 text-lg text-white">{endMessage}</p>
+          <Button
+            variant="default"
             onClick={() => {
-              setEndMessage("");         
-              window.location.reload();   
+              setEndMessage("");
+              window.location.reload();
             }}
           >
             Play again
-          </button>
-            
+          </Button>
         </div>
       </div>
+
     )}
       <div className="grid grid-cols-4 grid-rows-4 h-80 sm:h-100 w-80 sm:w-100 gap-2">   
         {items.map((item, index) => (
@@ -195,6 +196,8 @@ return (
         handleClick={handleClick}
         />
       ))}
+
+
       </div>
       <div className="flex justify-center">
         <Button

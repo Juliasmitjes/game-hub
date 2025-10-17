@@ -6,11 +6,11 @@ import { Button } from "../components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 
-// ---- TYPES ----
+
 type Action = "rock" | "paper" | "scissors";
 type Winner = -1 | 0 | 1;
 
-// ---- CONSTANTS ----
+
 const actions: Record<Action, Action> = {
   rock: "scissors",
   paper: "rock",
@@ -23,7 +23,7 @@ const text: Record<Winner, string> = {
   [1]: "You lose!",
 };
 
-// ---- FUNCTIONS ----
+
 function randomAction(): Action {
   const keys = Object.keys(actions) as Action[];
   const index = Math.floor(Math.random() * keys.length);
@@ -36,7 +36,7 @@ function calculateWinner(action1: Action, action2: Action): Winner {
   else return 1;
 }
 
-// ---- COMPONENTS ----
+
 type ActionIconProps = {
   action: Action;
 } & IconBaseProps;
@@ -91,7 +91,7 @@ function ShowWinner({ winner = 0 }: { winner?: Winner }) {
   );
 }
 
-// ---- MAIN COMPONENT ----
+
 function Rps() {
   const [playerAction, setPlayerAction] = useState<Action>("rock");
   const [computerAction, setComputerAction] = useState<Action>("rock");
@@ -133,14 +133,14 @@ function Rps() {
         <CardContent>
 
           <div className="flex justify-center gap-12 mb-8">
-            {/* Player column */}
+           
             <div className="flex flex-col items-center text-center w-40">
               <p className="text-md lg:text-lg font-bold text-muted-foreground mb-1 mt-5">You</p>
               <p className="text-3xl font-bold text-primary mb-10">{playerScore}</p>
               <Player name="Player" action={playerAction} />
             </div>
 
-            {/* Computer column */}
+          
             <div className="flex flex-col items-center text-center w-40">
               <p className="text-md lg:text-lg font-bold text-muted-foreground mb-1 mt-5">Computer</p>
               <p className="text-3xl font-bold text-secondary mb-10">{computerScore}</p>
