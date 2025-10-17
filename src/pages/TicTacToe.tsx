@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { ArrowLeft, Sparkles } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
-
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type Player = "X" | "O" | null;
 
@@ -69,9 +70,41 @@ const endGame = (winner: "player" | "computer" | "draw") => {
   setGameOver(true);
   setScore(prev => ({
     ...prev,
-    [winner]: prev[winner] + 1
+    [winner]: prev[winner] + 1,
   }));
+
+  if (winner === "player") {
+    toast.success("🏆 You win!", {
+      style: {
+        backgroundColor: "rgb(59 130 246)", 
+        color: "#fff",
+        fontWeight: "600",
+        borderRadius: "0.75rem",
+      }
+    });
+  } else if (winner === "computer") {
+    toast.error("🤖 The computer wins!", {
+      style: {
+        backgroundColor: "rgb(234 88 12)", 
+        color: "#fff",
+        fontWeight: "600",
+        borderRadius: "0.75rem",
+      }
+    });
+  } else {
+    toast.info("🤝 It’s a draw!", {
+      style: {
+        backgroundColor: "rgb(107 114 128)", 
+        color: "#fff",
+        fontWeight: "600",
+        borderRadius: "0.75rem",
+      }
+    });
+  }
+
+  setTimeout(() => resetGame(), 2000);
 };
+
 
  const resetGame = () => {
     setBoard(Array(9).fill(null));
@@ -146,6 +179,16 @@ const endGame = (winner: "player" | "computer" | "draw") => {
     </CardContent>
     </Card>
   </div>
+    <ToastContainer
+      position="top-center"
+      autoClose={2000}
+      hideProgressBar
+      closeOnClick
+      pauseOnHover
+      draggable
+      theme="dark"
+      transition={Slide}
+    />
 </div>
   );
   
