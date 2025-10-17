@@ -103,17 +103,17 @@ const endGame = (winner: "player" | "computer" | "draw") => {
           </CardHeader>
 
           <CardContent>
-            <div className="flex justify-center gap-8 mb-8 w-full">
-              <div className="text-center w-32">
-                <p className="text-md font-bold text-muted-foreground mb-2">You (X)</p>
+            <div className="flex justify-center sm:gap-8 mb-8 w-full">
+              <div className="text-center w-32 ">
+                <p className="text-sm sm:text-md lg:text-lg font-bold text-muted-foreground mb-2">You (X)</p>
                 <p className="text-3xl font-bold text-primary">{score.player}</p>
               </div>
-              <div className="text-center w-32">
-                <p className="text-md font-bold text-muted-foreground mb-2">Draws</p>
+              <div className="text-center w-32 ">
+                <p className="text-sm sm:text-md lg:text-lg font-bold text-muted-foreground mb-2">Draws</p>
                 <p className="text-3xl font-bold text-muted-foreground">{score.draw}</p>
               </div>
-              <div className="text-center w-32">
-                <p className="text-md font-bold text-muted-foreground mb-2">Computer (O)</p>
+              <div className="text-center w-32 ">
+                <p className="text-sm sm:text-md lg:text-lg font-bold text-muted-foreground mb-2">Computer (O)</p>
                 <p className="text-3xl font-bold text-secondary">{score.computer}</p>
               </div>
             </div>
